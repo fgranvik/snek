@@ -5,7 +5,7 @@ var DefaultSettings;
     DefaultSettings[DefaultSettings["width"] = 64] = "width";
     DefaultSettings[DefaultSettings["height"] = 64] = "height";
     DefaultSettings[DefaultSettings["speed"] = 32] = "speed";
-    DefaultSettings[DefaultSettings["gameLoop"] = 200] = "gameLoop";
+    DefaultSettings[DefaultSettings["gameLoop"] = 10] = "gameLoop";
     DefaultSettings[DefaultSettings["snekSize"] = 32] = "snekSize";
 })(DefaultSettings || (DefaultSettings = {}));
 var Direction;
@@ -35,8 +35,8 @@ class PlayGround {
             return Math.round(Math.random() * (max - min) + min);
         };
         this.repositionApple = () => {
-            const apple_X = this.randomPosition(0, (DefaultSettings.width * 10) / DefaultSettings.snekSize);
-            const apple_Y = this.randomPosition(0, (DefaultSettings.height * 10) / DefaultSettings.snekSize);
+            const apple_X = this.randomPosition(0, ((DefaultSettings.width * 10) / DefaultSettings.snekSize) - 1);
+            const apple_Y = this.randomPosition(0, ((DefaultSettings.height * 10) / DefaultSettings.snekSize) - 1);
             this.applePosition = {
                 X: apple_X,
                 Y: apple_Y
@@ -113,6 +113,7 @@ class Snek {
             if (this.position.X === playground.applePosition.X && this.position.Y === playground.applePosition.Y) {
                 playground.repositionApple();
                 Game.points += 1;
+                Game.gameSpeed -= 1;
                 this.pushToTail(this.position);
             }
             this.drawSnek(playground);
@@ -127,10 +128,10 @@ class Controls {
 _a = Controls;
 Controls.keyEvent = (ev) => {
     Controls.keyPressed = ev.code;
+    console.log("key pressed", _a.keyPressed);
     switch (_a.keyPressed) {
         case "KeyP":
-            Game.isRunning = !Game.isRunning;
-            Snek.currentDirection = Direction.Down;
+            Game.reset();
             break;
         case "ArrowDown":
             Snek.currentDirection = Direction.Down;
@@ -176,6 +177,25 @@ _c = Game;
 Game.isRunning = false;
 Game.points = 0;
 Game.gameSpeed = DefaultSettings.gameLoop;
+Game.reset = () => {
+    Game.isRunning = !Game.isRunning;
+    Snek.currentDirection = Direction.Down;
+};
+Game.run = (counter, playground, snek) => {
+    requestAnimationFrame((timestamp) => {
+        counter += 1;
+        if (_c.isRunning) {
+            if (counter >= Game.gameSpeed) {
+                _c.snek.move(playground);
+                counter = 0;
+            }
+        }
+        else {
+            Intro.init(playground);
+        }
+        _c.run(counter, playground, snek);
+    });
+};
 Game.init = () => {
     window.onkeydown = Controls.keyEvent;
     let playground = new PlayGround();
@@ -183,14 +203,8 @@ Game.init = () => {
     playground.repositionApple();
     playground.drawApple();
     _c.snek = new Snek(0, 0);
-    setInterval(() => {
-        if (_c.isRunning) {
-            _c.snek.move(playground);
-        }
-        else {
-            Intro.init(playground);
-        }
-    }, _c.gameSpeed);
+    let counter = 0;
+    _c.run(counter, playground, _c.snek);
 };
 Game.init();
 //# sourceMappingURL=app.js.map

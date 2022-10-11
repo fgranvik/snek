@@ -2,7 +2,7 @@ enum DefaultSettings {
   width = 64,
   height = 64,
   speed = DefaultSettings.width/2,
-  gameLoop = 200,
+  gameLoop = 10,
   snekSize = DefaultSettings.width/2
 }
 
@@ -49,8 +49,8 @@ class PlayGround {
   }  
 
   repositionApple = () :void => {
-    const apple_X = this.randomPosition(0, (DefaultSettings.width*10)/DefaultSettings.snekSize)
-    const apple_Y = this.randomPosition(0, (DefaultSettings.height*10)/DefaultSettings.snekSize)
+    const apple_X = this.randomPosition(0, ((DefaultSettings.width*10)/DefaultSettings.snekSize)-1)
+    const apple_Y = this.randomPosition(0, ((DefaultSettings.height*10)/DefaultSettings.snekSize)-1)
   
     this.applePosition = {
       X: apple_X, 
@@ -60,7 +60,6 @@ class PlayGround {
 
   drawApple = () :void => {
     this.context.fillStyle = "#AA0000"
-
     this.context.fillRect(this.applePosition.X*DefaultSettings.snekSize, this.applePosition.Y*DefaultSettings.snekSize,32,32)
   }
 
@@ -152,6 +151,7 @@ class Snek {
     if(this.position.X === playground.applePosition.X && this.position.Y === playground.applePosition.Y) {
       playground.repositionApple()
       Game.points += 1
+      Game.gameSpeed -= 1
       this.pushToTail(this.position)
     }
 
@@ -165,11 +165,11 @@ class Controls {
 
   static keyEvent = (ev: KeyboardEvent) => { 
     Controls.keyPressed = ev.code 
-
+    console.log("key pressed", this.keyPressed)
+    
     switch(this.keyPressed) {
       case "KeyP":
-        Game.isRunning = !Game.isRunning
-        Snek.currentDirection = Direction.Down
+        Game.reset()
         break;
       case "ArrowDown":
         Snek.currentDirection = Direction.Down
@@ -222,6 +222,27 @@ class Game {
   static points: number = 0
   static gameSpeed = DefaultSettings.gameLoop
 
+  static reset = () :void => {
+    Game.isRunning = !Game.isRunning
+    Snek.currentDirection = Direction.Down
+  }
+  
+  static run = (counter: number, playground: PlayGround, snek: Snek) => {
+    requestAnimationFrame((timestamp) => {
+      counter += 1
+      
+      if(this.isRunning) {
+        if(counter >= Game.gameSpeed) {
+          this.snek.move(playground)
+          counter = 0
+        }
+      } else {
+        Intro.init(playground)
+      }
+      
+      this.run(counter, playground, snek)
+    })
+  }
   static init = () => {
     window.onkeydown = Controls.keyEvent
 
@@ -229,15 +250,11 @@ class Game {
     playground.init()
     playground.repositionApple()
     playground.drawApple()
-    this.snek = new Snek(0,0)
 
-    setInterval(() => {
-      if(this.isRunning) {
-        this.snek.move(playground)
-      } else {
-        Intro.init(playground)
-      }
-    }, this.gameSpeed)
+    this.snek = new Snek(0,0)
+    let counter = 0
+    this.run(counter, playground, this.snek)
+
   }
 }
 
