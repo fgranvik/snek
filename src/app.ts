@@ -112,7 +112,7 @@ class Snek {
   }
 
   move = (playground: PlayGround) :void => {
-    console.log("position", this.position)
+    // console.log("position", this.position)
 
     if(Snek.currentDirection !== Snek.previousDirection) {
       Snek.previousDirection = Snek.currentDirection
@@ -151,7 +151,10 @@ class Snek {
     if(this.position.X === playground.applePosition.X && this.position.Y === playground.applePosition.Y) {
       playground.repositionApple()
       Game.points += 1
-      Game.gameSpeed -= 1
+      const speed = Game.gameSpeed*.05
+      Game.gameSpeed -= speed
+
+      console.log("game speed", Game.gameSpeed)
       this.pushToTail(this.position)
     }
 
@@ -165,7 +168,7 @@ class Controls {
 
   static keyEvent = (ev: KeyboardEvent) => { 
     Controls.keyPressed = ev.code 
-    console.log("key pressed", this.keyPressed)
+    // console.log("key pressed", this.keyPressed)
     
     switch(this.keyPressed) {
       case "KeyP":
@@ -225,10 +228,13 @@ class Game {
   static reset = () :void => {
     Game.isRunning = !Game.isRunning
     Snek.currentDirection = Direction.Down
+    Game.points = 0;
+    Game.gameSpeed = DefaultSettings.gameLoop
+    this.snek.position = {X: 0, Y: 0}
   }
-  
+
   static run = (counter: number, playground: PlayGround, snek: Snek) => {
-    requestAnimationFrame((timestamp) => {
+    requestAnimationFrame(() => {
       counter += 1
       
       if(this.isRunning) {
