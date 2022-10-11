@@ -67,6 +67,15 @@ class Snek {
         break
     }
 
+    // Check if snek eats itself
+    if (
+      this.tail.some(
+        (value) => value.X === this.head.X && value.Y === this.head.Y
+      )
+    ) {
+      this.killSnek()
+    }
+
     // Check if Snek is within boundry
     if (
       this.head.X < 0 ||
