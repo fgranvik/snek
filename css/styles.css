@@ -1,0 +1,11 @@
+body {
+  background-color: #f2f2f2;
+}
+canvas {
+  border: 1px solid #666;
+  background-color: #090;
+  background-image: url('../images/grass.jpeg');
+  background-size: 80%;
+  font-smooth: never;
+  -webkit-font-smoothing: none;
+}
