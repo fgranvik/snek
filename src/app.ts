@@ -35,9 +35,10 @@ class Game {
 
     if (!this.snek.isAlive) {
       this.snek.direction = Direction.Down
-      this.points = 0
+      this.playground.points = 0
       this.snek.head = { X: 0, Y: 0 }
       this.snek.tail = []
+      this.snek.speed = DefaultSettings.gameLoop
       this.snek.isAlive = true
       this.isRunning = true
     }
