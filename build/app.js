@@ -80,7 +80,6 @@ class Snek {
             Game.isRunning = false;
         };
         this.move = (playground) => {
-            // console.log("position", this.position)
             if (Snek.currentDirection !== Snek.previousDirection) {
                 Snek.previousDirection = Snek.currentDirection;
             }
@@ -130,21 +129,28 @@ class Controls {
 _a = Controls;
 Controls.keyEvent = (ev) => {
     Controls.keyPressed = ev.code;
-    // console.log("key pressed", this.keyPressed)
     switch (_a.keyPressed) {
         case "KeyP":
             Game.reset();
             break;
         case "ArrowDown":
+            if (Snek.previousDirection == Direction.Up)
+                return;
             Snek.currentDirection = Direction.Down;
             break;
         case "ArrowUp":
+            if (Snek.previousDirection == Direction.Down)
+                return;
             Snek.currentDirection = Direction.Up;
             break;
         case "ArrowRight":
+            if (Snek.previousDirection == Direction.Left)
+                return;
             Snek.currentDirection = Direction.Right;
             break;
         case "ArrowLeft":
+            if (Snek.previousDirection == Direction.Right)
+                return;
             Snek.currentDirection = Direction.Left;
             break;
         default:
@@ -185,6 +191,7 @@ Game.reset = () => {
     Game.points = 0;
     Game.gameSpeed = DefaultSettings.gameLoop;
     _c.snek.position = { X: 0, Y: 0 };
+    _c.snek.tail = [];
 };
 Game.run = (counter, playground, snek) => {
     requestAnimationFrame(() => {

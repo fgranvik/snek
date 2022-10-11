@@ -112,12 +112,10 @@ class Snek {
   }
 
   move = (playground: PlayGround) :void => {
-    // console.log("position", this.position)
-
     if(Snek.currentDirection !== Snek.previousDirection) {
       Snek.previousDirection = Snek.currentDirection
     }
-
+    
     this.rotateTail()
 
     switch(Snek.currentDirection) {
@@ -168,22 +166,25 @@ class Controls {
 
   static keyEvent = (ev: KeyboardEvent) => { 
     Controls.keyPressed = ev.code 
-    // console.log("key pressed", this.keyPressed)
-    
+
     switch(this.keyPressed) {
       case "KeyP":
         Game.reset()
         break;
       case "ArrowDown":
+        if(Snek.previousDirection == Direction.Up) return
         Snek.currentDirection = Direction.Down
         break;
       case "ArrowUp":
+        if(Snek.previousDirection == Direction.Down) return
         Snek.currentDirection = Direction.Up
         break;
       case "ArrowRight":
+        if(Snek.previousDirection == Direction.Left) return
         Snek.currentDirection = Direction.Right
         break;
       case "ArrowLeft":
+        if(Snek.previousDirection == Direction.Right) return
         Snek.currentDirection = Direction.Left
         break;
       default:
@@ -231,6 +232,7 @@ class Game {
     Game.points = 0;
     Game.gameSpeed = DefaultSettings.gameLoop
     this.snek.position = {X: 0, Y: 0}
+    this.snek.tail = []
   }
 
   static run = (counter: number, playground: PlayGround, snek: Snek) => {
