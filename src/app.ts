@@ -26,7 +26,7 @@ class Game {
     this.timer = 0
     this.points = 0
     this.isRunning = false
-    this.gameSpeed = DefaultSettings.gameLoop
+    this.gameSpeed = this.snek.speed
     this.controls()
   }
 
@@ -34,11 +34,8 @@ class Game {
     this.isRunning = !this.isRunning
 
     if (!this.snek.isAlive) {
-      debugger
-
       this.snek.direction = Direction.Down
       this.points = 0
-      this.gameSpeed = DefaultSettings.gameLoop
       this.snek.head = { X: 0, Y: 0 }
       this.snek.tail = []
       this.snek.isAlive = true
@@ -51,7 +48,7 @@ class Game {
       timer += 1
 
       if (this.isRunning && this.snek.isAlive) {
-        if (timer >= this.gameSpeed) {
+        if (timer >= this.snek.speed) {
           this.snek.move(this.playground)
           timer = 0
         }
@@ -69,21 +66,24 @@ class Game {
 
   controls = (): void => {
     document.addEventListener('keydown', (e: KeyboardEvent) => {
-      console.log('key pressed: ', e.code)
       switch (e.code) {
         case 'KeyP':
           this.reset()
           break
         case 'ArrowDown':
+          if (this.snek.previousDirection == Direction.Up) return
           this.snek.direction = Direction.Down
           break
         case 'ArrowUp':
+          if (this.snek.previousDirection == Direction.Down) return
           this.snek.direction = Direction.Up
           break
         case 'ArrowRight':
+          if (this.snek.previousDirection == Direction.Left) return
           this.snek.direction = Direction.Right
           break
         case 'ArrowLeft':
+          if (this.snek.previousDirection == Direction.Right) return
           this.snek.direction = Direction.Left
           break
       }

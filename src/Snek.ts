@@ -19,12 +19,14 @@ class Snek {
   direction: Direction | undefined
   previousDirection: Direction | undefined
   isAlive: boolean
+  speed: number
 
   constructor() {
     this.tail = []
     this.head = { X: 0, Y: 0 }
     this.direction = Direction.Down
     this.isAlive = true
+    this.speed = DefaultSettings.gameLoop
   }
 
   killSnek = (): void => {
@@ -42,7 +44,7 @@ class Snek {
 
   move = (playground: Playground): void => {
     playground.clear()
-    // playground.showPoints()
+    playground.showPoints()
 
     if (this.direction !== this.previousDirection) {
       this.previousDirection = this.direction
@@ -81,11 +83,10 @@ class Snek {
       this.head.Y === playground.applePosition.Y
     ) {
       playground.repositionApple()
-      // Game.points += 1
-      // const speed = Game.gameSpeed * 0.05
-      // Game.gameSpeed -= speed
+      playground.points += 1
+      const speed = this.speed * 0.05
+      this.speed -= speed
 
-      // console.log('game speed', Game.gameSpeed)
       this.pushToTail(this.head)
     }
 

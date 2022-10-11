@@ -9,6 +9,8 @@ class Playground {
   canvas: HTMLCanvasElement
   context: CanvasRenderingContext2D | any
   applePosition: Position
+  points: number
+  record: number
 
   constructor() {
     this.canvas = document.createElement('canvas') as HTMLCanvasElement
@@ -17,6 +19,8 @@ class Playground {
     this.canvas.height = DefaultSettings.height * 10
     this.canvas.id = 'Snek'
     this.applePosition = { X: 0, Y: 0 }
+    this.points = 0
+    this.record = 0
   }
 
   randomPosition = (min: number, max: number): number => {
@@ -44,9 +48,15 @@ class Playground {
     this.context.fillRect(
       this.applePosition.X * DefaultSettings.snekSize,
       this.applePosition.Y * DefaultSettings.snekSize,
-      32,
-      32
+      DefaultSettings.snekSize,
+      DefaultSettings.snekSize
     )
+  }
+
+  showPoints = (): void => {
+    this.context.font = `${DefaultSettings.width / 2.2}px Marker Felt`
+    this.context.fillStyle = '#FFFFFF'
+    this.context.fillText(`Points: ${this.points}`, 15, 50)
   }
 
   clear = () => {
