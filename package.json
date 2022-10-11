@@ -1,0 +1,19 @@
+{
+  "name": "snek",
+  "version": "1.0.0",
+  "description": "snake game",
+  "main": "snek.js",
+  "scripts": {
+    "dev": "tsc-watch",
+    "build": "tsc",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "snek"
+  ],
+  "author": "Fredrik Granvik",
+  "license": "ISC",
+  "devDependencies": {
+    "typescript": "^4.8.4"
+  }
+}
