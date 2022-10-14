@@ -48,7 +48,6 @@ class Game {
     requestAnimationFrame(() => {
       const verifyTimer = Date.now()
       const diff = verifyTimer - timer
-      console.log('timer: ', this.snek.speed)
 
       if (this.isRunning && this.snek.isAlive) {
         if (diff >= this.snek.speed) {
