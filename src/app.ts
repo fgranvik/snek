@@ -6,7 +6,7 @@ export enum DefaultSettings {
   width = 64,
   height = 64,
   speed = DefaultSettings.width / 2,
-  gameLoop = 10,
+  gameLoop = 120,
   snekSize = DefaultSettings.width / 2
 }
 
@@ -23,7 +23,7 @@ class Game {
     this.playground = new Playground()
     this.snek = new Snek()
     this.gui = new Gui()
-    this.timer = 0
+    this.timer = Date.now()
     this.points = 0
     this.isRunning = false
     this.gameSpeed = this.snek.speed
@@ -46,12 +46,14 @@ class Game {
 
   run = (timer: number): void => {
     requestAnimationFrame(() => {
-      timer += 1
+      const verifyTimer = Date.now()
+      const diff = verifyTimer - timer
+      console.log('timer: ', this.snek.speed)
 
       if (this.isRunning && this.snek.isAlive) {
-        if (timer >= this.snek.speed) {
+        if (diff >= this.snek.speed) {
           this.snek.move(this.playground)
-          timer = 0
+          timer = Date.now()
         }
       } else {
         if (this.snek.isAlive) {

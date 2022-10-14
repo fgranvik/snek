@@ -93,7 +93,7 @@ class Snek {
     ) {
       playground.repositionApple()
       playground.points += 1
-      const speed = this.speed * 0.05
+      const speed = this.speed * 0.03
       this.speed -= speed
 
       this.pushToTail(this.head)
