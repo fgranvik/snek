@@ -36,7 +36,13 @@ class Game {
 
   reset = (): void => {
     this.isRunning = !this.isRunning
-    this.musicPlayer.toggle()
+    console.log('running', this.isRunning)
+
+    if (this.isRunning) {
+      console.log('start?')
+      this.musicPlayer.init()
+      this.musicPlayer.toggle()
+    }
 
     if (!this.snek.isAlive) {
       this.snek.direction = Direction.Down
@@ -106,7 +112,6 @@ class Game {
   init = (): void => {
     this.playground.init()
     this.snek.init(this.playground)
-    this.musicPlayer.init()
     this.run(this.timer)
   }
 }
