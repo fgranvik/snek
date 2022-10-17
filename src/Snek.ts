@@ -112,11 +112,81 @@ class Snek {
       DefaultSettings.snekSize,
       DefaultSettings.snekSize
     )
+
+    // Zig zag pattern
+    context.beginPath()
+    context.fillStyle = '#222222'
+    context.moveTo(
+      position.X * DefaultSettings.snekSize + DefaultSettings.snekSize,
+      position.Y * DefaultSettings.snekSize
+    )
+    context.lineTo(
+      position.X * DefaultSettings.snekSize + DefaultSettings.snekSize,
+      position.Y * DefaultSettings.snekSize + DefaultSettings.snekSize
+    )
+    context.lineTo(
+      position.X * DefaultSettings.snekSize + DefaultSettings.snekSize / 2,
+      position.Y * DefaultSettings.snekSize + DefaultSettings.snekSize / 2
+    )
+    context.moveTo(
+      position.X * DefaultSettings.snekSize,
+      position.Y * DefaultSettings.snekSize
+    )
+    context.lineTo(
+      position.X * DefaultSettings.snekSize,
+      position.Y * DefaultSettings.snekSize + DefaultSettings.snekSize
+    )
+    context.lineTo(
+      position.X * DefaultSettings.snekSize + DefaultSettings.snekSize / 2,
+      position.Y * DefaultSettings.snekSize + DefaultSettings.snekSize / 2
+    )
+    context.fill()
+  }
+
+  snekHead = (color: string, position: Position, playground: Playground) => {
+    let context = playground.context
+    context.fillStyle = color
+    context.fillRect(
+      position.X * DefaultSettings.snekSize,
+      position.Y * DefaultSettings.snekSize,
+      DefaultSettings.snekSize,
+      DefaultSettings.snekSize
+    )
+    // First eye
+    context.fillStyle = '#FFFFFF'
+    context.fillRect(
+      position.X * DefaultSettings.snekSize + 5,
+      position.Y * DefaultSettings.snekSize + 5,
+      5,
+      5
+    )
+    // Second eye
+    context.fillRect(
+      position.X * DefaultSettings.snekSize + 15,
+      position.Y * DefaultSettings.snekSize + 5,
+      5,
+      5
+    )
+    // mouth
+    context.fillStyle = '#990000'
+    context.fillStyle = 'red'
+    context.beginPath()
+    context.ellipse(
+      position.X * DefaultSettings.snekSize + 15,
+      position.Y * DefaultSettings.snekSize + 15,
+      10,
+      10,
+      0,
+      0,
+      Math.PI * 1
+    )
+    context.fill()
   }
 
   drawSnek = (playground: Playground): void => {
     // Draw head of snek
-    this.snekBlock('#000000', this.head, playground)
+    // this.snekBlock('#000000', this.head, playground)
+    this.snekHead('#000000', this.head, playground)
 
     // Draw tail of snek
     this.tail.forEach((position) => {
