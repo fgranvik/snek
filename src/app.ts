@@ -50,13 +50,9 @@ class Game {
       const diff = verifyTimer - timer
 
       if (this.isRunning && this.snek.isAlive) {
-        if (this.snek.direction != this.snek.previousDirection) {
+        if (diff >= this.snek.speed) {
           this.snek.move(this.playground)
-        } else {
-          if (diff >= this.snek.speed) {
-            this.snek.move(this.playground)
-            timer = Date.now()
-          }
+          timer = Date.now()
         }
       } else {
         if (this.snek.isAlive) {
