@@ -80,7 +80,7 @@ class Gui {
     // Start
     this.context.fillStyle = '#FFFFFF'
     this.context.fillText(
-      'Press `P` to play again..',
+      'Press `Space` to play again..',
       DefaultSettings.width * 10 * 0.18,
       DefaultSettings.height * 10 * 0.8
     )
