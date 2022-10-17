@@ -33,8 +33,8 @@ class Gui {
     // Start
     this.context.font = `${DefaultSettings.height * 10 * 0.1}px Marker Felt`
     this.context.fillText(
-      'Press `P` to play',
-      DefaultSettings.width * 10 * 0.16,
+      'Press `Space` to play',
+      DefaultSettings.width * 10 * 0.1,
       DefaultSettings.height * 10 * 0.7
     )
 

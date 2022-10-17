@@ -16,11 +16,9 @@ class MusicPlayer {
     }
 
     if (this.isPlaying === false && this.audioElement) {
-      debugger
       this.audioElement.play()
       this.isPlaying = true
     } else if (this.isPlaying === true && this.audioElement) {
-      debugger
       this.audioElement.pause()
       this.isPlaying = false
     }

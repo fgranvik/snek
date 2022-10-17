@@ -36,10 +36,8 @@ class Game {
 
   reset = (): void => {
     this.isRunning = !this.isRunning
-    console.log('running', this.isRunning)
 
     if (this.isRunning) {
-      console.log('start?')
       this.musicPlayer.init()
       this.musicPlayer.toggle()
     }
@@ -80,13 +78,12 @@ class Game {
   controls = (): void => {
     document.addEventListener('keydown', (e: KeyboardEvent) => {
       this.keyPressed = e.code
-      console.log('key pressed', e.code)
 
       switch (e.code) {
         case 'KeyM':
           this.musicPlayer.toggle()
           break
-        case 'KeyP':
+        case 'Space':
           this.reset()
           break
         case 'ArrowDown':

@@ -6,6 +6,6 @@ canvas {
   background-color: #090;
   background-image: url('../images/grass.jpeg');
   background-size: 80%;
-  font-smooth: never;
-  -webkit-font-smoothing: none;
+  font-smooth: antialiased;
+  -webkit-font-smoothing: antialiased;
 }
