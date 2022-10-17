@@ -1,9 +1,5 @@
 import { DefaultSettings } from './app'
-
-type Position = {
-  X: number
-  Y: number
-}
+import { Position } from './types'
 
 class Playground {
   canvas: HTMLCanvasElement

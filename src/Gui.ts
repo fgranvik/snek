@@ -4,10 +4,6 @@ import Playground from './Playground'
 class Gui {
   context: CanvasRenderingContext2D | any
 
-  drawText = (text: string, size: number) :void {
-
-  }
-
   intro = (playground: Playground): void => {
     this.context = playground.context
     // This is

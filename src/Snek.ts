@@ -1,10 +1,6 @@
 import { DefaultSettings } from './app'
 import Playground from './Playground'
-
-type Position = {
-  X: number
-  Y: number
-}
+import { Position } from './types'
 
 export enum Direction {
   Up,
