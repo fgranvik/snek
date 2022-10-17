@@ -1,6 +1,7 @@
 import Gui from './Gui'
 import Playground from './Playground'
 import Snek, { Direction } from './Snek'
+import MusicPlayer from './MusicPlayer'
 
 export enum DefaultSettings {
   width = 64,
@@ -18,6 +19,8 @@ class Game {
   points: number
   isRunning: boolean
   gameSpeed: number
+  musicPlayer: MusicPlayer
+  keyPressed: string | undefined
 
   constructor() {
     this.playground = new Playground()
@@ -28,10 +31,12 @@ class Game {
     this.isRunning = false
     this.gameSpeed = this.snek.speed
     this.controls()
+    this.musicPlayer = new MusicPlayer()
   }
 
   reset = (): void => {
     this.isRunning = !this.isRunning
+    this.musicPlayer.toggle()
 
     if (!this.snek.isAlive) {
       this.snek.direction = Direction.Down
@@ -68,8 +73,13 @@ class Game {
 
   controls = (): void => {
     document.addEventListener('keydown', (e: KeyboardEvent) => {
+      this.keyPressed = e.code
       console.log('key pressed', e.code)
+
       switch (e.code) {
+        case 'KeyM':
+          this.musicPlayer.toggle()
+          break
         case 'KeyP':
           this.reset()
           break
@@ -96,7 +106,7 @@ class Game {
   init = (): void => {
     this.playground.init()
     this.snek.init(this.playground)
-
+    this.musicPlayer.init()
     this.run(this.timer)
   }
 }
