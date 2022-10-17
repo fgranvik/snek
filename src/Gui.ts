@@ -47,7 +47,7 @@ class Gui {
     )
   }
 
-  uDead = (): void => {
+  uDead = (points: number): void => {
     // Snek
     this.context.font = `${DefaultSettings.height * 3}px Marker Felt`
 
@@ -64,13 +64,18 @@ class Gui {
       DefaultSettings.height * 10 * 0.5
     )
 
-    // Start
-    this.context.fillStyle = '#FFFFFF'
     this.context.font = `${DefaultSettings.height * 0.7}px Marker Felt`
     this.context.fillText(
+      `Your score: ${points}`,
+      DefaultSettings.width * 10 * 0.24,
+      DefaultSettings.height * 10 * 0.67
+    )
+    // Start
+    this.context.fillStyle = '#FFFFFF'
+    this.context.fillText(
       'Press `P` to play again..',
-      DefaultSettings.width * 10 * 0.16,
-      DefaultSettings.height * 10 * 0.7
+      DefaultSettings.width * 10 * 0.18,
+      DefaultSettings.height * 10 * 0.8
     )
   }
 }

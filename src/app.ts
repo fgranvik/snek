@@ -50,15 +50,19 @@ class Game {
       const diff = verifyTimer - timer
 
       if (this.isRunning && this.snek.isAlive) {
-        if (diff >= this.snek.speed) {
+        if (this.snek.direction != this.snek.previousDirection) {
           this.snek.move(this.playground)
-          timer = Date.now()
+        } else {
+          if (diff >= this.snek.speed) {
+            this.snek.move(this.playground)
+            timer = Date.now()
+          }
         }
       } else {
         if (this.snek.isAlive) {
           this.gui.intro(this.playground)
         } else {
-          this.gui.uDead()
+          this.gui.uDead(this.playground.points)
         }
       }
 
@@ -68,6 +72,7 @@ class Game {
 
   controls = (): void => {
     document.addEventListener('keydown', (e: KeyboardEvent) => {
+      console.log('key pressed', e.code)
       switch (e.code) {
         case 'KeyP':
           this.reset()
