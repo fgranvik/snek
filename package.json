@@ -4,11 +4,8 @@
   "description": "snake game",
   "main": "snek.js",
   "scripts": {
-    "dev": "tsc-watch --noClear",
-    "dev-server": "tsc-watch --noClear -p ./tsconfig.json --onSuccess \"node ./build/app.js\"",
-    "build": "tsc",
-    "build-wp": "webpack --config ./webpack.config.js",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "run": "webpack --config ./webpack.config.js",
+    "build": "tsc"
   },
   "keywords": [
     "snek"
