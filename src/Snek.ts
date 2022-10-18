@@ -1,4 +1,4 @@
-import { DefaultSettings } from './app'
+import Game, { DefaultSettings } from './app'
 import Playground from './Playground'
 import { Position } from './types'
 
@@ -38,7 +38,8 @@ class Snek {
     this.tail.push(JSON.parse(JSON.stringify(this.head)))
   }
 
-  move = (playground: Playground): void => {
+  move = (game: Game): void => {
+    const playground = game.playground
     playground.clear()
     playground.showPoints()
 
@@ -87,6 +88,7 @@ class Snek {
       this.head.X === playground.applePosition.X &&
       this.head.Y === playground.applePosition.Y
     ) {
+      game.musicPlayer.slurp()
       playground.repositionApple()
       playground.points += 1
       const speed = this.speed * 0.03
@@ -194,8 +196,8 @@ class Snek {
     })
   }
 
-  init = (playground: Playground): void => {
-    this.drawSnek(playground)
+  init = (game: Game): void => {
+    this.drawSnek(game.playground)
   }
 }
 

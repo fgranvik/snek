@@ -60,7 +60,7 @@ class Game {
 
       if (this.isRunning && this.snek.isAlive) {
         if (diff >= this.snek.speed) {
-          this.snek.move(this.playground)
+          this.snek.move(this)
           timer = Date.now()
         }
       } else {
@@ -108,7 +108,7 @@ class Game {
 
   init = (): void => {
     this.playground.init()
-    this.snek.init(this.playground)
+    this.snek.init(this)
     this.run(this.timer)
   }
 }

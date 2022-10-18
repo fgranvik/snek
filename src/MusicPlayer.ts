@@ -1,8 +1,11 @@
 class MusicPlayer {
   isPlaying: boolean
   audioContext: AudioContext | undefined
-  audioElement: HTMLAudioElement | undefined
-  track: any
+  musicElement: HTMLAudioElement | undefined
+  slurpElement: HTMLAudioElement | undefined
+  musicTrack: any
+  slurpTrack: any
+  gainNode?: GainNode
 
   constructor() {
     this.isPlaying = false
@@ -15,27 +18,44 @@ class MusicPlayer {
       this.audioContext.resume()
     }
 
-    if (this.isPlaying === false && this.audioElement) {
-      this.audioElement.play()
+    if (this.isPlaying === false && this.musicElement) {
+      this.musicElement.play()
       this.isPlaying = true
-    } else if (this.isPlaying === true && this.audioElement) {
-      this.audioElement.pause()
+    } else if (this.isPlaying === true && this.musicElement) {
+      this.musicElement.pause()
       this.isPlaying = false
     }
   }
 
+  slurp = (): void => {
+    if (this.slurpElement) this.slurpElement.play()
+  }
+
   init = (): void => {
     this.audioContext = new AudioContext() as AudioContext
-    const audioElement = document.querySelector('audio') as HTMLAudioElement
 
-    if (audioElement) {
-      this.audioElement = audioElement
-      this.track = this.audioContext.createMediaElementSource(this.audioElement)
-    }
-    const gainNode = this.audioContext.createGain()
-    gainNode.gain.value = 1
+    this.musicElement = document.querySelector('audio') as HTMLAudioElement
+    this.slurpElement = document.querySelector(
+      'audio#slurp'
+    ) as HTMLAudioElement
 
-    this.track.connect(gainNode).connect(this.audioContext.destination)
+    this.musicTrack = this.audioContext.createMediaElementSource(
+      this.musicElement
+    )
+    this.slurpTrack = this.audioContext.createMediaElementSource(
+      this.musicElement
+    )
+
+    this.gainNode = this.audioContext.createGain()
+    this.gainNode.gain.value = 1
+
+    this.musicTrack
+      .connect(this.gainNode)
+      .connect(this.audioContext.destination)
+
+    this.slurpTrack
+      .connect(this.gainNode)
+      .connect(this.audioContext.destination)
   }
 }
 
