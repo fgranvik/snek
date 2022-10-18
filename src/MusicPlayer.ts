@@ -43,17 +43,17 @@ class MusicPlayer {
       this.musicElement
     )
     this.slurpTrack = this.audioContext.createMediaElementSource(
-      this.musicElement
+      this.slurpElement
     )
 
     this.gainNode = this.audioContext.createGain()
     this.gainNode.gain.value = 1
 
-    this.musicTrack
+    this.slurpTrack
       .connect(this.gainNode)
       .connect(this.audioContext.destination)
 
-    this.slurpTrack
+    this.musicTrack
       .connect(this.gainNode)
       .connect(this.audioContext.destination)
   }
