@@ -1,4 +1,4 @@
-import Game, { DefaultSettings } from './app'
+import Game, { DefaultSettings, gameMode } from './app'
 import Playground from './Playground'
 import { Position } from './types'
 
@@ -42,6 +42,7 @@ class Snek {
     const playground = game.playground
     playground.clear()
     playground.showPoints()
+    playground.showGameMode(game)
 
     if (this.direction !== this.previousDirection) {
       this.previousDirection = this.direction
@@ -74,13 +75,36 @@ class Snek {
     }
 
     // Check if Snek is within boundry
+
     if (
       this.head.X < 0 ||
       this.head.X >= (DefaultSettings.width * 10) / DefaultSettings.snekSize ||
       this.head.Y < 0 ||
       this.head.Y >= (DefaultSettings.height * 10) / DefaultSettings.snekSize
     ) {
-      this.killSnek()
+      if (game.gameMode == gameMode.easy) {
+        if (
+          this.head.X >
+          (DefaultSettings.width * 10) / DefaultSettings.snekSize
+        ) {
+          this.head.X = 0
+        }
+        if (this.head.X < 0) {
+          this.head.X = (DefaultSettings.width * 10) / DefaultSettings.snekSize
+        }
+
+        if (
+          this.head.Y >
+          (DefaultSettings.width * 10) / DefaultSettings.snekSize
+        ) {
+          this.head.Y = 0
+        }
+        if (this.head.Y < 0) {
+          this.head.Y = (DefaultSettings.width * 10) / DefaultSettings.snekSize
+        }
+      } else {
+        this.killSnek()
+      }
     }
 
     // Check if Snek eats apple

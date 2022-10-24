@@ -11,6 +11,11 @@ export enum DefaultSettings {
   snekSize = DefaultSettings.width / 2
 }
 
+export enum gameMode {
+  easy = 'Easy',
+  standard = 'Standard'
+}
+
 class Game {
   playground: Playground
   snek: Snek
@@ -21,6 +26,7 @@ class Game {
   gameSpeed: number
   musicPlayer: MusicPlayer
   keyPressed: string | undefined
+  gameMode: gameMode
 
   constructor() {
     this.playground = new Playground()
@@ -32,6 +38,7 @@ class Game {
     this.gameSpeed = this.snek.speed
     this.controls()
     this.musicPlayer = new MusicPlayer()
+    this.gameMode = gameMode.standard
   }
 
   reset = (): void => {
@@ -82,6 +89,13 @@ class Game {
       switch (e.code) {
         case 'KeyM':
           this.musicPlayer.toggle()
+          break
+        case 'KeyG':
+          if (this.gameMode == gameMode.easy) {
+            this.gameMode = gameMode.standard
+          } else {
+            this.gameMode = gameMode.easy
+          }
           break
         case 'Space':
           this.reset()

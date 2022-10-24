@@ -43,14 +43,14 @@ class Gui {
     this.context.fillText(
       'Use arrow keys to control your snek',
       DefaultSettings.width * 10 * 0.1,
-      DefaultSettings.height * 10 - 60
+      DefaultSettings.height * 10 - 100
     )
     // Instructions
     this.context.font = `${DefaultSettings.height * 10 * 0.05}px Marker Felt`
     this.context.fillText(
       'Use m-key to mute/unmute audio',
       DefaultSettings.width * 10 * 0.15,
-      DefaultSettings.height * 10 - 20
+      DefaultSettings.height * 10 - 60
     )
   }
 

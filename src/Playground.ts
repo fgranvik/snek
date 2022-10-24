@@ -1,4 +1,4 @@
-import { DefaultSettings } from './app'
+import Game, { DefaultSettings } from './app'
 import { Position } from './types'
 
 class Playground {
@@ -55,6 +55,16 @@ class Playground {
     this.context.fillText(`Points: ${this.points}`, 15, 50)
   }
 
+  showGameMode = (game: Game): void => {
+    this.context.font = `${DefaultSettings.width / 2.2}px Marker Felt`
+    this.context.fillStyle = '#FFFFFF'
+    this.context.fillText(
+      `Gamemode: ${game.gameMode}`,
+      DefaultSettings.width * 10 - 250,
+      DefaultSettings.width * 10 - 15
+    )
+  }
+
   clear = () => {
     this.context.clearRect(
       0,
@@ -65,7 +75,7 @@ class Playground {
   }
 
   init = (): void => {
-    document.body.appendChild(this.canvas)
+    document.body.prepend(this.canvas)
     this.repositionApple()
     this.drawApple()
   }
