@@ -1,5 +1,7 @@
 body {
   background-color: #f2f2f2;
+  font-family: sans-serif;
+  display: flex;
 }
 canvas {
   border: 1px solid #666;

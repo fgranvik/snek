@@ -65,6 +65,11 @@ class Game {
       const verifyTimer = Date.now()
       const diff = verifyTimer - timer
 
+      const debug = document.querySelector('div#debug')
+      if (debug) {
+        debug.innerHTML = `X: ${this.snek.head.X}, Y: ${this.snek.head.Y}`
+      }
+
       if (this.isRunning && this.snek.isAlive) {
         if (diff >= this.snek.speed) {
           this.snek.move(this)

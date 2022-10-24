@@ -76,33 +76,37 @@ class Snek {
 
     // Check if Snek is within boundry
 
-    if (
-      this.head.X < 0 ||
-      this.head.X >= (DefaultSettings.width * 10) / DefaultSettings.snekSize ||
-      this.head.Y < 0 ||
-      this.head.Y >= (DefaultSettings.height * 10) / DefaultSettings.snekSize
-    ) {
-      if (game.gameMode == gameMode.easy) {
-        if (
-          this.head.X >
-          (DefaultSettings.width * 10) / DefaultSettings.snekSize
-        ) {
-          this.head.X = 0
-        }
-        if (this.head.X < 0) {
-          this.head.X = (DefaultSettings.width * 10) / DefaultSettings.snekSize
-        }
+    if (game.gameMode == gameMode.easy) {
+      if (
+        this.head.X >=
+        (DefaultSettings.width * 10) / DefaultSettings.snekSize
+      ) {
+        this.head.X = 0
+      }
 
-        if (
-          this.head.Y >
-          (DefaultSettings.width * 10) / DefaultSettings.snekSize
-        ) {
-          this.head.Y = 0
-        }
-        if (this.head.Y < 0) {
-          this.head.Y = (DefaultSettings.width * 10) / DefaultSettings.snekSize
-        }
-      } else {
+      if (this.head.X <= -1) {
+        this.head.X =
+          (DefaultSettings.width * 10) / DefaultSettings.snekSize - 1
+      }
+      if (
+        this.head.Y >=
+        (DefaultSettings.height * 10) / DefaultSettings.snekSize
+      ) {
+        this.head.Y = 0
+      }
+
+      if (this.head.Y <= -1) {
+        this.head.Y =
+          (DefaultSettings.height * 10) / DefaultSettings.snekSize - 1
+      }
+    } else {
+      if (
+        this.head.X < 0 ||
+        this.head.X >=
+          (DefaultSettings.width * 10) / DefaultSettings.snekSize ||
+        this.head.Y < 0 ||
+        this.head.Y >= (DefaultSettings.height * 10) / DefaultSettings.snekSize
+      ) {
         this.killSnek()
       }
     }
