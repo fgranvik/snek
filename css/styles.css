@@ -3,6 +3,7 @@ body {
   font-family: sans-serif;
   display: flex;
 }
+
 canvas {
   border: 1px solid #666;
   background-color: #090;
@@ -10,4 +11,23 @@ canvas {
   background-size: 80%;
   font-smooth: antialiased;
   -webkit-font-smoothing: antialiased;
+}
+
+#instructions {
+  margin-left: 20px;
+  padding: 20px;
+  border: 1px solid #ccc;
+  background: #eee;
+}
+
+#instructions ul {
+  padding: 0;
+  list-style-position: inside;
+}
+
+#debug {
+  margin-left: 20px;
+  padding: 20px;
+  border: 1px solid #ccc;
+  background: #eee;
 }
