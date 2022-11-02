@@ -7,7 +7,7 @@ class Gui {
   intro = (playground: Playground): void => {
     this.context = playground.context
     // This is
-    this.context.font = `${DefaultSettings.width}px Marker Felt`
+    this.context.font = `${DefaultSettings.width}px Marker`
     this.context.fillStyle = '#FFFFFF'
     this.context.fillText(
       'this is',
@@ -16,7 +16,7 @@ class Gui {
     )
 
     // Snek
-    this.context.font = `${DefaultSettings.height * 10 * 0.35}px Marker Felt`
+    this.context.font = `${DefaultSettings.height * 10 * 0.35}px Marker`
     this.context.strokeStyle = 'orange'
     this.context.lineWidth = DefaultSettings.width * 10 * 0.06
     this.context.strokeText(
@@ -31,7 +31,7 @@ class Gui {
     )
 
     // Start
-    this.context.font = `${DefaultSettings.height * 10 * 0.1}px Marker Felt`
+    this.context.font = `${DefaultSettings.height * 10 * 0.1}px Marker`
     this.context.fillText(
       'Press `Space` to play',
       DefaultSettings.width * 10 * 0.1,
@@ -39,14 +39,14 @@ class Gui {
     )
 
     // Instructions
-    this.context.font = `${DefaultSettings.height * 10 * 0.05}px Marker Felt`
+    this.context.font = `${DefaultSettings.height * 10 * 0.05}px Marker`
     this.context.fillText(
       'Use arrow keys to control your snek',
       DefaultSettings.width * 10 * 0.1,
       DefaultSettings.height * 10 - 100
     )
     // Instructions
-    this.context.font = `${DefaultSettings.height * 10 * 0.05}px Marker Felt`
+    this.context.font = `${DefaultSettings.height * 10 * 0.05}px Marker`
     this.context.fillText(
       'Use m-key to mute/unmute audio',
       DefaultSettings.width * 10 * 0.15,
@@ -56,7 +56,7 @@ class Gui {
 
   uDead = (points: number): void => {
     // Snek
-    this.context.font = `${DefaultSettings.height * 3}px Marker Felt`
+    this.context.font = `${DefaultSettings.height * 3}px Marker`
 
     this.context.strokeStyle = 'orange'
     this.context.lineWidth = DefaultSettings.width * 10 * 0.06
@@ -71,7 +71,7 @@ class Gui {
       DefaultSettings.height * 10 * 0.5
     )
 
-    this.context.font = `${DefaultSettings.height * 0.7}px Marker Felt`
+    this.context.font = `${DefaultSettings.height * 0.7}px Marker`
     this.context.fillText(
       `Your score: ${points}`,
       DefaultSettings.width * 10 * 0.24,

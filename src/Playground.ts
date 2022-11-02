@@ -77,13 +77,13 @@ class Playground {
   }
 
   showPoints = (): void => {
-    this.context.font = `${DefaultSettings.width / 2.2}px Marker Felt`
+    this.context.font = `${DefaultSettings.width / 2.2}px Marker`
     this.context.fillStyle = '#FFFFFF'
     this.context.fillText(`Points: ${this.points}`, 15, 50)
   }
 
   showGameMode = (game: Game): void => {
-    this.context.font = `${DefaultSettings.width / 2.2}px Marker Felt`
+    this.context.font = `${DefaultSettings.width / 2.2}px Marker`
     this.context.fillStyle = '#FFFFFF'
     this.context.fillText(
       `Gamemode: ${game.gameMode}`,

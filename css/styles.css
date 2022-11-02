@@ -1,6 +1,11 @@
+@font-face {
+  font-family: Marker;
+  src: url(../fonts/MarkerFelt.ttc);
+}
+
 body {
   background-color: #f2f2f2;
-  font-family: sans-serif;
+  font-family: Marker, sans-serif;
   display: flex;
 }
 
