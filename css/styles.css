@@ -25,10 +25,18 @@ canvas {
 }
 
 #instructions {
-  margin-left: 20px;
+  margin-left: 0px;
+  margin-top: 20px;
   padding: 20px;
   border: 1px solid #ccc;
   background: #eee;
+}
+
+@media screen and (min-width: 600px) {
+  #instructions {
+    margin-left: 20px;
+    margin-top: 0;
+  }    
 }
 
 #instructions ul {
@@ -37,6 +45,7 @@ canvas {
 }
 
 #debug {
+  display: none;
   margin-left: 20px;
   padding: 20px;
   border: 1px solid #ccc;
