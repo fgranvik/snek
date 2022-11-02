@@ -4,7 +4,9 @@ import Playground from './Playground'
 class Gui {
   context: CanvasRenderingContext2D | any
 
-  intro = (playground: Playground): void => {
+  intro = (playground: Playground): void => {    
+    playground.clear()
+    
     this.context = playground.context
     // This is
     this.context.font = `${DefaultSettings.width}px Marker`
